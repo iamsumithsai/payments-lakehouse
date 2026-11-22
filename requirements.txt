@@ -1,0 +1,2 @@
+# Step 1 generator uses the Python standard library only.
+# Spark and Delta packages are added in the Bronze step.
