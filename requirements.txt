@@ -1,2 +1,3 @@
-# Step 1 generator uses the Python standard library only.
-# Spark and Delta packages are added in the Bronze step.
+# Pinned pair: delta-spark 3.2.x is built for Spark 3.5.x
+pyspark==3.5.3
+delta-spark==3.2.1

@@ -1,0 +1,12 @@
+services:
+  spark:
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+      # Keeps the downloaded Delta jars so later runs start fast
+      - ivy-cache:/root/.ivy2
+    command: python src/bronze.py
+
+volumes:
+  ivy-cache:
