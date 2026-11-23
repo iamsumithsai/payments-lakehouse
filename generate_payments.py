@@ -13,6 +13,7 @@ Usage:
   python generate_payments.py --days 7 --rows-per-day 5000 --start-date 2026-11-01 --seed 42
 """
 import argparse
+import calendar
 import csv
 import json
 import random
@@ -71,7 +72,9 @@ def fmt_ts(ts, rng, defects):
         defects["ts_format_dmy"] += 1
         return ts.strftime("%d/%m/%Y %H:%M:%S")
     defects["ts_format_epoch"] += 1
-    return int(ts.timestamp())
+    # UTC epoch: calendar.timegm ignores the machine's timezone, so data is identical everywhere.
+    # (ts.timestamp() on a naive datetime uses the local timezone and shifts values by e.g. 5.5h in India.)
+    return calendar.timegm(ts.timetuple())
 
 
 def make_day(day, n_rows, merchants, customers, rng, defects):
